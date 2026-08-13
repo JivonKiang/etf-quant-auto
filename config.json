@@ -1,0 +1,70 @@
+{
+  "schedule": {
+    "run_time": "14:45",
+    "timezone": "Asia/Shanghai",
+    "note": "每日运行时间（北京时间）。实际调度由 WorkBuddy 自动化 / GitHub Actions cron 控制，此处仅作文档与报告头部参考。"
+  },
+
+  "paths": {
+    "data_dir": "data",
+    "nav_cache": "data/nav_cache",
+    "signals_dir": "data/signals",
+    "trades_dir": "data/trades",
+    "log_dir": "data/logs",
+    "note": "所有路径均为相对项目根目录的相对路径；运行时数据（行情/交易/日志）全部落到 data/ 下，保证项目可迁移、易部署。"
+  },
+
+  "strategy": {
+    "fast_ma": 10,
+    "slow_ma": 30,
+    "hold_days": 20,
+    "min_hold": 7,
+    "take_profit": 0.15,
+    "macd_filter": true,
+    "note": "MA快线上穿慢线(金叉) + MACD柱>0 买入；持有 hold_days 天或 +take_profit 止盈卖出。min_hold 为 C 类免赎回费门槛。",
+    "pool": {
+      "004348": "南方中证500ETF联接C",
+      "001593": "天弘创业板ETF联接C",
+      "005733": "华夏上证50ETF联接C",
+      "006479": "广发纳斯达克100ETF联接C",
+      "006075": "博时标普500ETF联接C",
+      "007801": "大成中证红利指数C",
+      "007301": "国联安半导体ETF联接C",
+      "011613": "华夏科创50ETF联接C"
+    },
+    "etf_map": {
+      "004348": "sh510500",
+      "001593": "sz159915",
+      "005733": "sh510050",
+      "006479": "sh513100",
+      "006075": "sh513500",
+      "007801": "sh510880",
+      "007301": "sh512480",
+      "011613": "sh588000"
+    }
+  },
+
+  "mode": {
+    "backtest_enabled": true,
+    "live_enabled": true,
+    "note": "backtest_enabled=每日运行回测并记录绩效；live_enabled=每日运行信号检测并记录/通知（实盘执行因场外基金无公开 API，落地为信号记录+邮件通知）。"
+  },
+
+  "data_source": {
+    "fund_js": "http://fund.eastmoney.com/pingzhongdata/{code}.js",
+    "realtime_url": "http://qt.gtimg.cn/q={codes}",
+    "start_date": "2020-01-01"
+  },
+
+  "notify": {
+    "email_enabled": true,
+    "to": "fmmujf@163.com",
+    "note": "SMTP 账号/密码从环境变量读取（MAIL_SERVER/MAIL_PORT/MAIL_USERNAME/MAIL_PASSWORD/MAIL_TO），避免明文入库。"
+  },
+
+  "retry": {
+    "max_attempts": 3,
+    "backoff_seconds": 2,
+    "note": "网络请求失败自动重试次数与退避间隔，保证单次异常不中断整日任务。"
+  }
+}
