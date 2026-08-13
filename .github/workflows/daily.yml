@@ -55,6 +55,18 @@ jobs:
               body: `@${context.repo.owner}\n\n${report || '（今日报告生成失败，请查看仓库 data/signals/）'}`
             });
             console.log('日报 Issue 已创建: ' + data.html_url);
+            // 关闭之前的日报 Issue，只保留当天 open
+            const { data: oldIssues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo, state: 'open', per_page: 50
+            });
+            for (const i of oldIssues) {
+              if (i.title.startsWith('📊 ETF 量化日报') && i.title !== title) {
+                await github.rest.issues.update({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: i.number, state: 'closed'
+                });
+              }
+            }
 
       - name: 部署到 gh-pages
         run: |
