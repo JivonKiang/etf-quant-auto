@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 jobs:
   daily:
@@ -37,6 +38,23 @@ jobs:
             git commit -m "daily run $(date -u +%F-%H%M)" || true
             git push
           fi
+
+      - name: 创建日报 Issue（@mention 触发 GitHub 邮件通知到绑定邮箱）
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let report = '';
+            try { report = fs.readFileSync('data/signals/report_latest.md', 'utf8'); } catch (e) {}
+            const date = new Date(Date.now() + 8 * 3600 * 1000).toISOString().split('T')[0];
+            const title = `📊 ETF 量化日报 ${date}`;
+            const { data } = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body: `@${context.repo.owner}\n\n${report || '（今日报告生成失败，请查看仓库 data/signals/）'}`
+            });
+            console.log('日报 Issue 已创建: ' + data.html_url);
 
       - name: 部署到 gh-pages
         run: |
