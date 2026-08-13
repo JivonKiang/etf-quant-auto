@@ -1,6 +1,6 @@
 name: ETF 量化自动化
 
-# 云上无人值守：本地电脑关机也能每天定时跑全流程（数据获取→回测→信号→记录→邮件）
+# 云上无人值守：本地电脑关机也能每天定时跑全流程（取数→回测→信号→持仓提醒→邮件→前端→部署）
 on:
   schedule:
     # UTC 6:45 = 北京时间 14:45（与 config.json schedule.run_time 一致）
@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: 运行每日全流程
+      - name: 运行每日全流程（回测 + 信号 + 持仓提醒 + 邮件）
         run: python run_daily.py
         env:
           MAIL_SERVER: ${{ secrets.MAIL_SERVER }}
@@ -29,14 +29,27 @@ jobs:
           MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
           MAIL_TO: ${{ secrets.MAIL_TO }}
 
-      - name: 回传运行结果（信号/交易/日志）
+      - name: 生成前端页面
+        run: python build_site.py
+
+      - name: 回传运行结果（信号/交易/日志/前端）
         run: |
           git config user.name github-actions
           git config user.email actions@github.com
-          git add data/ 2>/dev/null || true
+          git add data/ index.html 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "无变更，跳过提交"
           else
             git commit -m "daily run $(date -u +%F-%H%M)" || true
             git push
           fi
+
+      - name: 部署到 gh-pages
+        run: |
+          mkdir -p /tmp/pages
+          cp index.html /tmp/pages/
+          cd /tmp/pages
+          git init -b gh-pages
+          git add .
+          git -c user.name=github-actions -c user.email=actions@github.com commit -m "update site $(date -u +%F-%H%M)" || true
+          git push -f https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages
