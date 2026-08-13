@@ -1,0 +1,42 @@
+name: ETF 量化自动化
+
+# 云上无人值守：本地电脑关机也能每天定时跑全流程（数据获取→回测→信号→记录→邮件）
+on:
+  schedule:
+    # UTC 6:45 = 北京时间 14:45（与 config.json schedule.run_time 一致）
+    - cron: '45 6 * * 1-5'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 运行每日全流程
+        run: python run_daily.py
+        env:
+          MAIL_SERVER: ${{ secrets.MAIL_SERVER }}
+          MAIL_PORT: ${{ secrets.MAIL_PORT }}
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+
+      - name: 回传运行结果（信号/交易/日志）
+        run: |
+          git config user.name github-actions
+          git config user.email actions@github.com
+          git add data/ 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "无变更，跳过提交"
+          else
+            git commit -m "daily run $(date -u +%F-%H%M)" || true
+            git push
+          fi
