@@ -8,9 +8,14 @@ on:
         required: true
         type: string
       body:
-        description: 'Issue 正文（会自动加 @owner 提及触发邮件通知）'
+        description: 'Issue 正文（自动 @owner 触发邮件通知，可选配 image_url 展示截图）'
         required: true
         type: string
+      image_url:
+        description: '可选：截图 URL，会以 markdown image 形式插在正文后'
+        required: false
+        type: string
+        default: ''
 
 permissions:
   issues: write
@@ -24,13 +29,18 @@ jobs:
         env:
           ISSUE_TITLE: ${{ inputs.title }}
           ISSUE_BODY: ${{ inputs.body }}
+          IMAGE_URL: ${{ inputs.image_url }}
         with:
           script: |
-            const { ISSUE_TITLE, ISSUE_BODY } = process.env;
+            const { ISSUE_TITLE, ISSUE_BODY, IMAGE_URL } = process.env;
+            let body = `@${context.repo.owner}\n\n${ISSUE_BODY}`;
+            if (IMAGE_URL && IMAGE_URL.trim().length > 0) {
+              body += `\n\n![Codex 截图](${IMAGE_URL})`;
+            }
             const { data } = await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: ISSUE_TITLE,
-              body: `@${context.repo.owner}\n\n${ISSUE_BODY}`
+              body: body
             });
             console.log('已创建 Issue: ' + data.html_url);
