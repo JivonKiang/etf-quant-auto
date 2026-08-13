@@ -49,6 +49,19 @@ def save_backtest(metrics, equity, trades, today=None):
     return path
 
 
+def save_report(text, today=None):
+    """把每日报告文本落盘（供 agent-mail 自动化读取后发送）。"""
+    today = today or datetime.date.today().isoformat()
+    path = os.path.join(config.CONFIG.paths.signals_dir, f"report_{today}.md")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(text)
+    latest = os.path.join(config.CONFIG.paths.signals_dir, "report_latest.md")
+    with open(latest, "w", encoding="utf-8") as f:
+        f.write(text)
+    log.info("报告已保存：%s", latest)
+    return latest
+
+
 def render_markdown_report(signals, metrics=None):
     """生成每日 Markdown 报告文本（供邮件/日志）。"""
     L = [f"# ETF 量化日报 — {datetime.date.today()}", ""]
