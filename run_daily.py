@@ -98,6 +98,7 @@ def main():
     if pos_report:
         report_text = report_text.rstrip() + "\n\n" + pos_report
     print("\n" + report_text)
+    reporter.save_report(report_text)
     if not no_mail:
         notifier.send_email(f"📊 ETF 量化日报 {datetime.date.today()}", report_text)
 
