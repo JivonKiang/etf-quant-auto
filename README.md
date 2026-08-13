@@ -13,8 +13,10 @@
 
 ```
 etf-quant-auto/
-├── config.json              # 集中配置（运行时间/数据路径/策略参数/回测实盘开关/重试/邮件）
+├── config.json              # 集中配置（运行时间/数据路径/策略参数/回测实盘开关/重试/邮件/持仓提醒）
 ├── run_daily.py             # 每日主入口（编排全流程）
+├── build_site.py            # 生成 GitHub Pages 前端 index.html
+├── index.html               # 前端页面（build_site 自动生成）
 ├── core/                    # 核心模块
 │   ├── config.py            #   配置加载 + 相对路径解析
 │   ├── logger.py            #   日志（控制台 + data/logs/）
@@ -24,14 +26,16 @@ etf-quant-auto/
 │   ├── strategy.py          #   策略（金叉+MACD 买入，持有/止盈卖出）
 │   ├── backtest.py          #   回测引擎（资金曲线 + 绩效指标）
 │   ├── executor.py          #   实盘信号检测与执行
+│   ├── position_alert.py    #   持仓买卖提醒（止盈/止损/破位/加仓）
 │   ├── reporter.py          #   结果记录（信号/交易/报告落盘）
 │   └── notifier.py          #   邮件通知（SMTP）
 ├── data/                    # 运行数据（相对路径，自动创建）
+│   ├── positions.json       #   用户实际持仓（手动回报录入）
 │   ├── nav_cache/           #   净值缓存（不入库）
 │   ├── signals/             #   每日信号 + 回测结果
 │   ├── trades/              #   交易明细
 │   └── logs/                #   运行日志
-└── .github/workflows/daily.yml  # 云上定时执行
+└── .github/workflows/daily.yml  # 云上定时执行 + gh-pages 部署
 ```
 
 ## 配置说明（config.json）
