@@ -20,14 +20,8 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: 运行每日全流程（回测 + 信号 + 持仓提醒 + 邮件）
-        run: python run_daily.py
-        env:
-          MAIL_SERVER: ${{ secrets.MAIL_SERVER }}
-          MAIL_PORT: ${{ secrets.MAIL_PORT }}
-          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
-          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
-          MAIL_TO: ${{ secrets.MAIL_TO }}
+      - name: 运行每日全流程（回测 + 信号 + 持仓提醒，通知走本地 agent-mail）
+        run: python run_daily.py --no-mail
 
       - name: 生成前端页面
         run: python build_site.py
