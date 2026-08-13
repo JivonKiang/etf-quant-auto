@@ -1,0 +1,36 @@
+name: Codex 任务通知
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: 'Issue 标题'
+        required: true
+        type: string
+      body:
+        description: 'Issue 正文（会自动加 @owner 提及触发邮件通知）'
+        required: true
+        type: string
+
+permissions:
+  issues: write
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 创建通知 Issue（@mention 触发邮件）
+        uses: actions/github-script@v7
+        env:
+          ISSUE_TITLE: ${{ inputs.title }}
+          ISSUE_BODY: ${{ inputs.body }}
+        with:
+          script: |
+            const { ISSUE_TITLE, ISSUE_BODY } = process.env;
+            const { data } = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: ISSUE_TITLE,
+              body: `@${context.repo.owner}\n\n${ISSUE_BODY}`
+            });
+            console.log('已创建 Issue: ' + data.html_url);
