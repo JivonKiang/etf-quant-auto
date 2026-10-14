@@ -1,0 +1,90 @@
+[
+  {
+    "code": "004348",
+    "name": "南方中证500ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-08-16",
+    "held_days": 59,
+    "buy_nav": 2.3437,
+    "latest_nav": 2.0615,
+    "ret": -0.12040790203524343,
+    "latest_date": "2026-10-12"
+  },
+  {
+    "code": "001593",
+    "name": "天弘创业板ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-08-17",
+    "held_days": 58,
+    "buy_nav": 1.4626,
+    "latest_nav": 1.1483,
+    "ret": -0.21489128948447955,
+    "latest_date": "2026-10-13"
+  },
+  {
+    "code": "005733",
+    "name": "华夏上证50ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-09-06",
+    "held_days": 38,
+    "buy_nav": 1.1135,
+    "latest_nav": 1.069,
+    "ret": -0.039964077233947015,
+    "latest_date": "2026-10-13"
+  },
+  {
+    "code": "006479",
+    "name": "广发纳斯达克100ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-09-22",
+    "held_days": 22,
+    "buy_nav": 8.2404,
+    "latest_nav": 8.2346,
+    "ret": -0.0007038493277023994,
+    "latest_date": "2026-10-12"
+  },
+  {
+    "code": "006075",
+    "name": "博时标普500ETF联接C",
+    "state": "HOLDING",
+    "buy_date": "2026-10-07",
+    "held_days": 7,
+    "buy_nav": 5.4472,
+    "latest_nav": 5.4716,
+    "ret": 0.004479365545601466,
+    "latest_date": "2026-10-12"
+  },
+  {
+    "code": "007801",
+    "name": "大成中证红利指数C",
+    "state": "WAIT",
+    "buy_date": "2026-07-20",
+    "held_days": 86,
+    "buy_nav": 2.6125,
+    "latest_nav": 2.7601,
+    "ret": 0.05649760765550238,
+    "latest_date": "2026-10-13"
+  },
+  {
+    "code": "007301",
+    "name": "国联安半导体ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-04-15",
+    "held_days": 182,
+    "buy_nav": 3.1032,
+    "latest_nav": 3.3028,
+    "ret": 0.06432070121165245,
+    "latest_date": "2026-10-13"
+  },
+  {
+    "code": "011613",
+    "name": "华夏科创50ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-06-22",
+    "held_days": 114,
+    "buy_nav": 1.4925,
+    "latest_nav": 1.1359,
+    "ret": -0.23892797319933,
+    "latest_date": "2026-10-12"
+  }
+]
