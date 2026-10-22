@@ -4,84 +4,84 @@
     "name": "南方中证500ETF联接C",
     "state": "WAIT",
     "buy_date": "2026-08-16",
-    "held_days": 66,
+    "held_days": 67,
     "buy_nav": 2.3437,
-    "latest_nav": 1.9981,
-    "ret": -0.14745914579511032,
-    "latest_date": "2026-10-19"
+    "latest_nav": 1.9983,
+    "ret": -0.14737381064129373,
+    "latest_date": "2026-10-20"
   },
   {
     "code": "001593",
     "name": "天弘创业板ETF联接C",
     "state": "WAIT",
     "buy_date": "2026-08-17",
-    "held_days": 65,
+    "held_days": 66,
     "buy_nav": 1.4626,
-    "latest_nav": 1.1,
-    "ret": -0.2479146725010255,
-    "latest_date": "2026-10-19"
+    "latest_nav": 1.0382,
+    "ret": -0.2901681936277861,
+    "latest_date": "2026-10-21"
   },
   {
     "code": "005733",
     "name": "华夏上证50ETF联接C",
     "state": "WAIT",
     "buy_date": "2026-09-06",
-    "held_days": 45,
+    "held_days": 46,
     "buy_nav": 1.1135,
-    "latest_nav": 1.0652,
-    "ret": -0.04337674000898073,
-    "latest_date": "2026-10-19"
+    "latest_nav": 1.0599,
+    "ret": -0.04813650651100121,
+    "latest_date": "2026-10-20"
   },
   {
     "code": "006479",
     "name": "广发纳斯达克100ETF联接C",
     "state": "WAIT",
     "buy_date": "2026-09-22",
-    "held_days": 29,
+    "held_days": 30,
     "buy_nav": 8.2404,
-    "latest_nav": 7.9389,
-    "ret": -0.03658802970729569,
-    "latest_date": "2026-10-18"
+    "latest_nav": 7.927,
+    "ret": -0.0380321343624096,
+    "latest_date": "2026-10-19"
   },
   {
     "code": "006075",
     "name": "博时标普500ETF联接C",
     "state": "HOLDING",
     "buy_date": "2026-10-07",
-    "held_days": 14,
+    "held_days": 15,
     "buy_nav": 5.4472,
-    "latest_nav": 5.3987,
-    "ret": -0.008903656924658443,
-    "latest_date": "2026-10-19"
+    "latest_nav": 5.4279,
+    "ret": -0.0035431047143485994,
+    "latest_date": "2026-10-20"
   },
   {
     "code": "007801",
     "name": "大成中证红利指数C",
     "state": "HOLDING",
     "buy_date": "2026-10-18",
-    "held_days": 3,
+    "held_days": 4,
     "buy_nav": 2.739,
-    "latest_nav": 2.7085,
-    "ret": -0.011135450894486976,
-    "latest_date": "2026-10-19"
+    "latest_nav": 2.6829,
+    "ret": -0.02048192771084334,
+    "latest_date": "2026-10-20"
   },
   {
     "code": "007301",
     "name": "国联安半导体ETF联接C",
     "state": "WAIT",
     "buy_date": "2026-04-15",
-    "held_days": 189,
+    "held_days": 190,
     "buy_nav": 3.1032,
-    "latest_nav": 3.1962,
-    "ret": 0.02996906419180201,
-    "latest_date": "2026-10-19"
+    "latest_nav": 3.2017,
+    "ret": 0.03174142820314518,
+    "latest_date": "2026-10-20"
   },
   {
     "code": "011613",
     "name": "华夏科创50ETF联接C",
     "state": "WAIT",
     "buy_date": "2026-06-22",
-    "held_days": 121,
+    "held_days": 122,
     "buy_nav": 1.4925,
     "latest_nav": 1.0722,
     "ret": -0.28160804020100494,
