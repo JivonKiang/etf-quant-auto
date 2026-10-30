@@ -1,0 +1,90 @@
+[
+  {
+    "code": "004348",
+    "name": "南方中证500ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-08-16",
+    "held_days": 75,
+    "buy_nav": 2.3437,
+    "latest_nav": 1.8483,
+    "ret": -0.21137517600375477,
+    "latest_date": "2026-10-29"
+  },
+  {
+    "code": "001593",
+    "name": "天弘创业板ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-08-17",
+    "held_days": 74,
+    "buy_nav": 1.4626,
+    "latest_nav": 0.9769,
+    "ret": -0.3320798577875017,
+    "latest_date": "2026-10-29"
+  },
+  {
+    "code": "005733",
+    "name": "华夏上证50ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-09-06",
+    "held_days": 54,
+    "buy_nav": 1.1135,
+    "latest_nav": 1.0596,
+    "ret": -0.048405927256398584,
+    "latest_date": "2026-10-29"
+  },
+  {
+    "code": "006479",
+    "name": "广发纳斯达克100ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-09-22",
+    "held_days": 38,
+    "buy_nav": 8.2404,
+    "latest_nav": 7.8927,
+    "ret": -0.04219455366244351,
+    "latest_date": "2026-10-28"
+  },
+  {
+    "code": "006075",
+    "name": "博时标普500ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-10-07",
+    "held_days": 23,
+    "buy_nav": 5.4472,
+    "latest_nav": 5.3963,
+    "ret": -0.009344250257012687,
+    "latest_date": "2026-10-28"
+  },
+  {
+    "code": "007801",
+    "name": "大成中证红利指数C",
+    "state": "HOLDING",
+    "buy_date": "2026-10-18",
+    "held_days": 12,
+    "buy_nav": 2.739,
+    "latest_nav": 2.7083,
+    "ret": -0.011208470244614799,
+    "latest_date": "2026-10-28"
+  },
+  {
+    "code": "007301",
+    "name": "国联安半导体ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-04-15",
+    "held_days": 198,
+    "buy_nav": 3.1032,
+    "latest_nav": 2.7941,
+    "ret": -0.09960685743748399,
+    "latest_date": "2026-10-29"
+  },
+  {
+    "code": "011613",
+    "name": "华夏科创50ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-06-22",
+    "held_days": 130,
+    "buy_nav": 1.4925,
+    "latest_nav": 0.9345,
+    "ret": -0.37386934673366834,
+    "latest_date": "2026-10-29"
+  }
+]
