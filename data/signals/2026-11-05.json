@@ -1,0 +1,90 @@
+[
+  {
+    "code": "004348",
+    "name": "南方中证500ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-08-16",
+    "held_days": 81,
+    "buy_nav": 2.3437,
+    "latest_nav": 1.9731,
+    "ret": -0.1581260400221871,
+    "latest_date": "2026-11-04"
+  },
+  {
+    "code": "001593",
+    "name": "天弘创业板ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-08-17",
+    "held_days": 80,
+    "buy_nav": 1.4626,
+    "latest_nav": 1.0357,
+    "ret": -0.29187747846301093,
+    "latest_date": "2026-11-04"
+  },
+  {
+    "code": "005733",
+    "name": "华夏上证50ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-09-06",
+    "held_days": 60,
+    "buy_nav": 1.1135,
+    "latest_nav": 1.0835,
+    "ret": -0.026942074539739624,
+    "latest_date": "2026-11-04"
+  },
+  {
+    "code": "006479",
+    "name": "广发纳斯达克100ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-09-22",
+    "held_days": 44,
+    "buy_nav": 8.2404,
+    "latest_nav": 7.6329,
+    "ret": -0.0737221494102227,
+    "latest_date": "2026-11-03"
+  },
+  {
+    "code": "006075",
+    "name": "博时标普500ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-10-07",
+    "held_days": 29,
+    "buy_nav": 5.4472,
+    "latest_nav": 5.3795,
+    "ret": -0.012428403583492287,
+    "latest_date": "2026-11-03"
+  },
+  {
+    "code": "007801",
+    "name": "大成中证红利指数C",
+    "state": "BUY",
+    "buy_date": "2026-11-04",
+    "held_days": 1,
+    "buy_nav": 2.694,
+    "latest_nav": 2.694,
+    "ret": 0.0,
+    "latest_date": "2026-11-04"
+  },
+  {
+    "code": "007301",
+    "name": "国联安半导体ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-04-15",
+    "held_days": 204,
+    "buy_nav": 3.1032,
+    "latest_nav": 3.0839,
+    "ret": -0.006219386439804131,
+    "latest_date": "2026-11-04"
+  },
+  {
+    "code": "011613",
+    "name": "华夏科创50ETF联接C",
+    "state": "WAIT",
+    "buy_date": "2026-06-22",
+    "held_days": 136,
+    "buy_nav": 1.4925,
+    "latest_nav": 1.0298,
+    "ret": -0.3100167504187604,
+    "latest_date": "2026-11-04"
+  }
+]
