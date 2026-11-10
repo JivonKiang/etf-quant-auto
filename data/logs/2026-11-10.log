@@ -1,0 +1,6 @@
+2026-11-10 16:09:19 [ERROR] etf_quant: 信号检测失败 纳指ETF(513100)：unsupported operand type(s) for +=: 'float' and 'NoneType'
+2026-11-10 16:09:20 [ERROR] etf_quant: 信号检测失败 科创50ETF(588000)：unsupported operand type(s) for +=: 'float' and 'NoneType'
+2026-11-10 16:11:20 [INFO] etf_quant: 已缓存 024418 净值 280 条（最新 2026-11-08）
+2026-11-10 16:11:21 [INFO] etf_quant: 已缓存 017997 净值 888 条（最新 2026-11-08）
+2026-11-10 16:11:21 [INFO] etf_quant: 已缓存 007531 净值 1801 条（最新 2026-11-08）
+2026-11-10 16:11:22 [INFO] etf_quant: 已缓存 020640 净值 649 条（最新 2026-11-08）

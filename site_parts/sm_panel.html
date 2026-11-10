@@ -1,0 +1,66 @@
+  <!-- ============ 同花顺 SuperMind 模拟盘 section ============ -->
+  <div class="sm-hero">
+    <div class="sm-top">
+      <div>
+        <h1>同花顺 SuperMind 模拟盘<span class="badge">ETF动量轮动 · Q75对照 · 初始资金 ¥100万</span></h1>
+        <div class="sub">JIVONLAB-ETF动量轮动-Q75对照 · V2胜率优化版 · 模拟盘ID 6af2c90f…3968 · 主号 · 2026-11-10 重建并起跑（从当前日）</div>
+      </div>
+      <div class="sm-status"><span class="live-dot"></span>运行中 · V2已上线 · 待今日收盘后首笔调仓</div>
+    </div>
+    <div class="kpis sm-kpis">
+      <div class="kpi"><div class="v">¥100.0万</div><div class="l">总资产（初始）</div></div>
+      <div class="kpi"><div class="v">-</div><div class="l">今日盈亏（待首日结算）</div></div>
+      <div class="kpi"><div class="v">V2</div><div class="l">策略版本（胜率优化版已上线模拟盘）</div></div>
+      <div class="kpi"><div class="v sm-mail">✉ 已部署</div><div class="l">交易邮件通知（工作日15:05自动检测）</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot"></span>V1 → V2 胜率优化 · 回测全指标对比<span class="cnt">同花顺SuperMind官方回测</span></h2>
+    <table class="sm-table">
+      <tr><th>指标</th><th>V1（回测3 · 已下线）</th><th>V2（回测1 · 模拟盘当前）</th><th>变化</th></tr>
+      <tr><td>策略收益</td><td>+19.83%</td><td class="pos">+32.96%</td><td class="pos">+13.13pp</td></tr>
+      <tr><td>年化收益</td><td>+21.12%</td><td class="pos">+35.23%</td><td class="pos">+14.11pp</td></tr>
+      <tr><td>基准收益</td><td class="neg">-14.82%</td><td class="neg">-14.82%</td><td>—</td></tr>
+      <tr><td>Alpha</td><td>0.36</td><td class="pos">0.48</td><td class="pos">↑</td></tr>
+      <tr><td>Beta</td><td>0.93</td><td>0.83</td><td class="pos">↓更防守</td></tr>
+      <tr><td>夏普 Sharpe</td><td>0.69</td><td class="pos">1.25</td><td class="pos">+0.56</td></tr>
+      <tr><td>索提诺 Sortino</td><td>1.27</td><td class="pos">2.24</td><td class="pos">+0.97</td></tr>
+      <tr><td>信息比率 IR</td><td>1.64</td><td class="pos">2.14</td><td class="pos">+0.50</td></tr>
+      <tr><td>最大回撤</td><td class="neg">-26.09%</td><td class="neg">-23.53%</td><td class="pos">收窄2.56pp</td></tr>
+      <tr><td>胜率（已平仓）</td><td>50.85%（28笔平仓 14胜14负）</td><td class="pos">65.62%</td><td class="pos">+14.77pp · 交易约31笔（换手↓）</td></tr>
+    </table>
+    <div class="note"><b>V2 七项修复</b>：①防守滞回（连续2周全池不合格才进国债防守、≥2只合格才回归，根治511010反复横跳）②移动止损-8% ③硬止损放宽至-10% ④风险调整动量（收益/波动）⑤动量&gt;0准入 ⑥止损冷却按交易周计 ⑦标的池扩至12只。V1 亏损主因：防守资产反复买入卖出（511010连亏4笔）+ 7月利润回吐（-6.9万/-4.8万止盈单）。</div>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot"></span>V1 已平仓盈亏分布（28笔真实平仓记录）<span class="cnt">涨红 · 跌绿</span></h2>
+    <div id="smPnlChart"></div>
+    <div class="note">V1 回测3 全部已平仓交易的盈亏（元）。累计盈利 ≈ +38.5万 / 累计亏损 ≈ -24.6万，净 ≈ +13.9万。亏损单集中在：511010 防守横跳（10月连亏4笔）与 7/16 止盈回吐（-6.9万/-4.9万）——V2 的滞回+移动止损正针对这两处。</div>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot"></span>回测交易明细 · 最近24笔<span class="cnt">V1 回测3 · 同花顺官方成交记录</span></h2>
+    <table id="smTrades"></table>
+    <div class="note">数据采集自 SuperMind 成交明细页（48笔全量中的最近24笔）。模拟盘（V1逻辑）今日收盘后将产生第一笔实盘模拟调仓，成交后本表上方将叠加「模拟盘实时成交」并邮件通知。</div>
+  </div>
+
+  <div class="card sm-notify">
+    <h2><span class="dot"></span>✉ 买卖邮件通知链（已部署 · 实测通过）</h2>
+    <div class="sm-steps">
+      <div class="step"><b>1</b>每个工作日 15:05 计划任务（SuperMind_Watch_1505）启动 supermind_watch.py</div>
+      <div class="step"><b>2</b>调 SuperMind API 读模拟盘成交（/platform/simuaccount/gettradelog，无需登录态）</div>
+      <div class="step"><b>3</b>与上次快照（supermind_state.json）diff —— 发现新买入/卖出成交</div>
+      <div class="step"><b>4</b>163 邮箱 SMTP 立即发送通知：标的·方向·价格·数量·金额</div>
+    </div>
+    <div class="note">2026-11-10 15:40 V2 重建完成：登录态恢复（主号短信验证）→ 策略+回测+模拟盘全链路在主号名下重建 → 真实 simuaccount 已核正 已核正进 watch 脚本 → 空跑实测 EXIT=0 API 正常。旧账号（8942）资产弃用（短信通道不可达）。API 异常时脚本会发提醒邮件而非静默失败。</div>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot"></span>⏳ 待办与依赖（需管理员操作）</h2>
+    <div class="sm-steps">
+      <div class="step"><b>1</b>✅ 已完成（2026-11-10）：V2 胜率 65.62% 已回填（官方绩效API直采）；模拟盘已在主号名下重建并绑定 V2；watch 脚本 SIMU_ID 已核正实测通过</div>
+      <div class="step"><b>2</b>观察期：明起每个工作日 15:05 自动检测模拟盘成交并邮件通知；首个交易日（11-11）收盘后出现「[初始化]」周轮动日志即验证成功</div>
+      <div class="step"><b>3</b>旧账号名下的 V1 模拟盘与回测2/3/4 保留不删（数据源备用），但其短信通道不可达，后续以主号为唯一活跃线</div>
+    </div>
+  </div>

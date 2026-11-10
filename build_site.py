@@ -125,6 +125,10 @@ def build_benchmark():
         dates = [a["date"] for a in arr]
         ret = {}
         for i in range(1, len(nav)):
+            # 数据源缺失日 nav 为 None：当日与次日收益率都跳过（缺失日按 0 收益并入基准）
+            if nav[i] is None or nav[i - 1] is None:
+                ret[dates[i]] = 0.0
+                continue
             ret[dates[i]] = nav[i] / nav[i - 1] - 1
         fund_ret[code] = ret
         all_dates.update(dates)
@@ -422,6 +426,7 @@ tr:last-child td{border-bottom:none}
 .op-result .cmd{font-weight:500;color:var(--brand)}
 .op-result button{margin-left:8px;padding:4px 12px;background:#eef2ff;color:var(--brand);border:1px solid #e0e7ff;border-radius:6px;font-size:12px;cursor:pointer}
 footer{text-align:center;color:#94a3b8;font-size:12px;margin-top:22px}
+{SM_PANEL_CSS}
 @media(max-width:640px){
   .kpis{grid-template-columns:repeat(2,1fr)}
   .hero h1{font-size:20px}
@@ -523,7 +528,8 @@ footer{text-align:center;color:#94a3b8;font-size:12px;margin-top:22px}
     <table id="funds"></table>
   </div>
 
-  <footer>数据来源：天天基金 · 每日自动更新 · 仅供研究参考，不构成投资建议</footer>
+{SM_PANEL_HTML}
+  <footer>数据来源：同花顺 SuperMind 回测/模拟盘 · 天天基金 · 每日自动更新 · 仅供研究参考，不构成投资建议</footer>
 </div>
 <script>
 const DATA = __DATA__;
@@ -742,10 +748,26 @@ function copyCmd(){
   if(navigator.clipboard){ navigator.clipboard.writeText(txt); }
   else{ const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); }
 }
+{SM_PANEL_JS}
 </script>
 </body>
 </html>
 """
+
+
+def _load_sm_parts():
+    """加载 SuperMind 模拟盘面板片段（site_parts/ 下三个文件，缺失时回退空串）。
+
+    片段与页面同源构建：构建时注入，避免手改 index.html 被每日 CI 重新生成覆盖。
+    """
+    base = os.path.join(os.path.dirname(__file__), "site_parts")
+    parts = {}
+    for key, fname in (("SM_PANEL_CSS", "sm_panel.css"),
+                       ("SM_PANEL_HTML", "sm_panel.html"),
+                       ("SM_PANEL_JS", "sm_panel.js")):
+        p = os.path.join(base, fname)
+        parts[key] = open(p, encoding="utf-8").read() if os.path.exists(p) else ""
+    return parts
 
 
 def main():
@@ -764,6 +786,9 @@ def main():
             .replace("{bench_cum}", str(data["metrics"]["bench_cum"]))
             .replace("{bench_mdd}", str(data["metrics"]["bench_mdd"])))
     html = html.replace("__DATA__", json.dumps(data, ensure_ascii=False))
+    # 注入 SuperMind 模拟盘面板片段（公域脱敏版，见 site_parts/）
+    for key, val in _load_sm_parts().items():
+        html = html.replace("{" + key + "}", val)
     out = os.path.join(os.path.dirname(__file__), "index.html")
     open(out, "w", encoding="utf-8").write(html)
     print("生成 index.html 完成,", len(html), "字节")
