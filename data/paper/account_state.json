@@ -2,11 +2,24 @@
   "initial_cash": 50000.0,
   "cash": 50000.0,
   "positions": {},
-  "pending_orders": [],
+  "pending_orders": [
+    {
+      "code": "562500",
+      "side": "BUY",
+      "signal_date": "2026-11-10",
+      "reason": "金叉+MACD>0"
+    }
+  ],
   "trades": [],
   "nav_daily": [
     {
       "date": "2026-10-25",
+      "cash": 50000.0,
+      "mv": 0.0,
+      "equity": 50000.0
+    },
+    {
+      "date": "2026-11-10",
       "cash": 50000.0,
       "mv": 0.0,
       "equity": 50000.0
