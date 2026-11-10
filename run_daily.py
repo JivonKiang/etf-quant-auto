@@ -17,6 +17,7 @@ import datetime
 from core import config
 from core.logger import get_logger, set_logger
 from core import data_fetcher, backtest, executor, reporter, notifier, position_alert
+from core import paper_account, paper_broker, news_digest
 
 log = get_logger()
 
@@ -52,10 +53,38 @@ def _run_position_alert():
     return alerts
 
 
+def _run_paper():
+    """模拟盘跑批：T 日收盘信号入 pending，成交按 T+1 开盘价撮合（防前视）。"""
+    pool = config.CONFIG.strategy.pool.raw()
+    kline_map = data_fetcher.fetch_all_kline(pool)
+    account = paper_account.PaperAccount.load()
+    exec_date = datetime.date.today().isoformat()
+    paper_broker.step(account, kline_map, exec_date)
+    account.save()
+    equity = account.nav_daily[-1]["equity"] if account.nav_daily else account.initial_cash
+    log.info("模拟盘完成：%s 持仓 %d 只 / 净值 %.2f / 挂单 %d",
+             exec_date, len(account.positions), equity, len(account.pending_orders))
+    return account
+
+
+def _paper_summary(acct):
+    """模拟盘状态摘要（追加到日报）。"""
+    nav = acct.nav_daily[-1] if acct.nav_daily else None
+    lines = ["## 模拟盘状态"]
+    if nav:
+        lines.append(f"- 净值 {nav['equity']:.2f}（现金 {nav['cash']:.2f}）")
+    lines.append(f"- 持仓 {len(acct.positions)} 只 / 挂单 {len(acct.pending_orders)} 单")
+    for t in acct.trades[-3:]:
+        price = t.get("open_price") or t.get("close_price") or 0
+        lines.append(f"- {t['side']} {t['code']} {t['shares']}股 @{price} {t.get('reason', '')}")
+    return "\n".join(lines)
+
+
 def main():
     args = set(sys.argv[1:])
     live_only = "--live-only" in args
     bt_only = "--backtest-only" in args
+    paper_only = "--paper-only" in args
     no_mail = "--no-mail" in args
 
     log.info("=" * 60)
@@ -72,31 +101,48 @@ def main():
     nav_map = data_fetcher.fetch_all_nav(pool)
 
     # 2) 回测（可选）
-    if config.CONFIG.mode.backtest_enabled and not live_only:
+    if config.CONFIG.mode.backtest_enabled and not live_only and not paper_only:
         try:
             metrics = _run_backtest(nav_map, config.CONFIG.data_source.start_date)
         except Exception as e:
             log.exception("回测阶段异常（不影响实盘）：%s", e)
 
     # 3) 实盘信号（可选）
-    if config.CONFIG.mode.live_enabled and not bt_only:
+    if config.CONFIG.mode.live_enabled and not bt_only and not paper_only:
         try:
             signals = _run_live()
         except Exception as e:
             log.exception("实盘信号阶段异常：%s", e)
 
     # 4) 持仓买卖提醒（可选，随实盘一起跑）
-    if config.CONFIG.mode.live_enabled and not bt_only:
+    if config.CONFIG.mode.live_enabled and not bt_only and not paper_only:
         try:
             pos_alerts = _run_position_alert()
         except Exception as e:
             log.exception("持仓提醒阶段异常：%s", e)
+
+    # 4.5) 模拟盘跑批（主流程：T 日收盘信号 → T+1 开盘价撮合，防前视）
+    paper_acct = None
+    if config.CONFIG.mode.paper_enabled and not bt_only:
+        try:
+            paper_acct = _run_paper()
+        except Exception as e:
+            log.exception("模拟盘阶段异常：%s", e)
+
+    # 4.6) 零 LLM 信息面（东财快讯，机械过滤）
+    if config.CONFIG.mode.news_enabled and not bt_only:
+        try:
+            news_digest.digest()
+        except Exception as e:
+            log.exception("信息面阶段异常：%s", e)
 
     # 5) 汇总 + 通知
     report_text = reporter.render_markdown_report(signals, metrics)
     pos_report = position_alert.render_position_report(pos_alerts)
     if pos_report:
         report_text = report_text.rstrip() + "\n\n" + pos_report
+    if paper_acct is not None:
+        report_text = report_text.rstrip() + "\n\n" + _paper_summary(paper_acct)
     print("\n" + report_text)
     reporter.save_report(report_text)
     if not no_mail:

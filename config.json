@@ -1,8 +1,8 @@
 {
   "schedule": {
-    "run_time": "14:45",
+    "run_time": "15:05",
     "timezone": "Asia/Shanghai",
-    "note": "每日运行时间（北京时间）。实际调度由 WorkBuddy 自动化 / GitHub Actions cron 控制，此处仅作文档与报告头部参考。"
+    "note": "每日运行时间（北京时间）。A股15:00收盘，15:05跑批：信号用当日收盘价计算，成交按T+1开盘价撮合（防前视）。由 Windows 计划任务触发 run_daily.py。"
   },
 
   "paths": {
@@ -23,14 +23,18 @@
     "macd_filter": true,
     "note": "MA快线上穿慢线(金叉) + MACD柱>0 买入；持有 hold_days 天或 +take_profit 止盈卖出。min_hold 为 C 类免赎回费门槛。",
     "pool": {
-      "004348": "南方中证500ETF联接C",
-      "001593": "天弘创业板ETF联接C",
-      "005733": "华夏上证50ETF联接C",
-      "006479": "广发纳斯达克100ETF联接C",
-      "006075": "博时标普500ETF联接C",
-      "007801": "大成中证红利指数C",
-      "007301": "国联安半导体ETF联接C",
-      "011613": "华夏科创50ETF联接C"
+      "510500": "中证500ETF",
+      "159915": "创业板ETF",
+      "510050": "上证50ETF",
+      "513100": "纳指ETF",
+      "513500": "标普500ETF",
+      "510880": "红利ETF",
+      "512480": "半导体ETF",
+      "588000": "科创50ETF",
+      "159516": "",
+      "510300": "沪深300ETF",
+      "512000": "券商ETF",
+      "562500": "机器人ETF华夏"
     },
     "etf_map": {
       "004348": "sh510500",
@@ -59,9 +63,11 @@
   },
 
   "mode": {
-    "backtest_enabled": true,
-    "live_enabled": true,
-    "note": "backtest_enabled=每日运行回测并记录绩效；live_enabled=每日运行信号检测并记录/通知（实盘执行因场外基金无公开 API，落地为信号记录+邮件通知）。"
+    "backtest_enabled": false,
+    "live_enabled": false,
+    "paper_enabled": true,
+    "news_enabled": true,
+    "note": "paper_enabled=每日15:05跑模拟盘（T+1开盘价撮合）；news_enabled=每日生成零LLM信息面汇总；backtest/live 为旧场外基金流程，已停用。"
   },
 
   "data_source": {
@@ -74,6 +80,23 @@
     "email_enabled": true,
     "to": "fmmujf@163.com",
     "note": "SMTP 账号/密码从环境变量读取（MAIL_SERVER/MAIL_PORT/MAIL_USERNAME/MAIL_PASSWORD/MAIL_TO），避免明文入库。"
+  },
+
+  "paper": {
+    "initial_cash": 50000,
+    "max_open_trades": 2,
+    "position_pct": 0.2,
+    "commission_rate": 0.00025,
+    "min_commission": 5,
+    "slippage": 0.001,
+    "note": "模拟盘：初始资金5万；同持≤2只；单标的≤最近收盘总资产20%；佣金万2.5最低5元/笔（ETF免印花税）；滑点0.1%；一手100股。"
+  },
+
+  "protections": {
+    "cooldown_days": 5,
+    "loss_pause_trades": 3,
+    "loss_pause_days": 5,
+    "note": "风控：平仓亏损→该标的冷却5自然日；连亏3笔→暂停全部买入5自然日；平仓盈利→连亏计数清零。"
   },
 
   "retry": {

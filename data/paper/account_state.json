@@ -1,0 +1,16 @@
+{
+  "initial_cash": 50000.0,
+  "cash": 50000.0,
+  "positions": {},
+  "pending_orders": [],
+  "trades": [],
+  "nav_daily": [
+    {
+      "date": "2026-10-25",
+      "cash": 50000.0,
+      "mv": 0.0,
+      "equity": 50000.0
+    }
+  ],
+  "protections": {}
+}

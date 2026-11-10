@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-25",
+  "start_date": "2020-01-01",
+  "gate": "胜率>50% 且平仓>=3笔",
+  "candidates": [
+    {
+      "code": "512660",
+      "name": "军工ETF国泰",
+      "win_rate": 35.7,
+      "trades": 28,
+      "avg_ret": 0.36,
+      "total_ret": 1.32,
+      "mdd": -10.0,
+      "final_equity": 50660.2,
+      "pass": false
+    },
+    {
+      "code": "515030",
+      "name": "新能源车ETF华夏",
+      "win_rate": 47.8,
+      "trades": 23,
+      "avg_ret": 0.71,
+      "total_ret": 2.79,
+      "mdd": -11.5,
+      "final_equity": 51392.9,
+      "pass": false
+    },
+    {
+      "code": "515790",
+      "name": "光伏ETF华泰柏瑞",
+      "win_rate": 35.0,
+      "trades": 20,
+      "avg_ret": -0.99,
+      "total_ret": -4.42,
+      "mdd": -13.3,
+      "final_equity": 47788.1,
+      "pass": false
+    },
+    {
+      "code": "159992",
+      "name": "创新药ETF银华",
+      "win_rate": 40.0,
+      "trades": 25,
+      "avg_ret": -1.21,
+      "total_ret": -6.99,
+      "mdd": -9.2,
+      "final_equity": 46507.4,
+      "pass": false
+    },
+    {
+      "code": "562500",
+      "name": "机器人ETF华夏",
+      "win_rate": 53.3,
+      "trades": 15,
+      "avg_ret": 5.34,
+      "total_ret": 16.5,
+      "mdd": -4.7,
+      "final_equity": 58251.3,
+      "pass": true
+    },
+    {
+      "code": "159755",
+      "name": "电池ETF广发",
+      "win_rate": 34.8,
+      "trades": 23,
+      "avg_ret": -0.99,
+      "total_ret": -5.03,
+      "mdd": -9.1,
+      "final_equity": 47485.5,
+      "pass": false
+    }
+  ],
+  "passed": [
+    "562500"
+  ]
+}

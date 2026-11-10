@@ -12,23 +12,36 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 _DEFAULTS = {
-    "schedule": {"run_time": "14:45", "timezone": "Asia/Shanghai"},
+    "schedule": {"run_time": "15:05", "timezone": "Asia/Shanghai"},
     "paths": {
         "data_dir": "data",
         "nav_cache": "data/nav_cache",
         "signals_dir": "data/signals",
         "trades_dir": "data/trades",
         "log_dir": "data/logs",
+        "paper_dir": "data/paper",
+        "news_dir": "data/news",
     },
     "strategy": {
         "fast_ma": 10, "slow_ma": 30, "hold_days": 20, "min_hold": 7,
         "take_profit": 0.15, "macd_filter": True, "pool": {}, "etf_map": {},
     },
-    "mode": {"backtest_enabled": True, "live_enabled": True},
+    "mode": {"backtest_enabled": True, "live_enabled": True,
+             "paper_enabled": True, "news_enabled": True},
     "data_source": {
         "fund_js": "http://fund.eastmoney.com/pingzhongdata/{code}.js",
         "realtime_url": "http://qt.gtimg.cn/q={codes}",
+        "kline_url": ("https://push2his.eastmoney.com/api/qt/stock/kline/get"
+                      "?secid={secid}&klt=101&fqt=1&beg={beg}&end=20500101"
+                      "&fields1=f1,f2,f3,f4,f5,f6&fields2=f51,f52,f53,f54,f55,f56,f57"),
         "start_date": "2020-01-01",
+    },
+    "paper": {
+        "initial_cash": 50000, "max_open_trades": 2, "position_pct": 0.2,
+        "commission_rate": 0.00025, "min_commission": 5, "slippage": 0.001,
+    },
+    "protections": {
+        "cooldown_days": 5, "loss_pause_trades": 3, "loss_pause_days": 5,
     },
     "notify": {"email_enabled": True, "to": ""},
     "retry": {"max_attempts": 3, "backoff_seconds": 2},
@@ -69,7 +82,8 @@ class Config:
 def _resolve_paths(cfg_data):
     """把 paths 里的相对路径解析为项目根目录下的绝对路径，并确保目录存在。"""
     p = cfg_data.get("paths", {})
-    for key in ("data_dir", "nav_cache", "signals_dir", "trades_dir", "log_dir"):
+    for key in ("data_dir", "nav_cache", "signals_dir", "trades_dir", "log_dir",
+                "paper_dir", "news_dir"):
         rel = p.get(key)
         if rel and not os.path.isabs(rel):
             abs_path = PROJECT_ROOT / rel
