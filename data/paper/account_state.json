@@ -1,22 +1,36 @@
 {
   "initial_cash": 50000.0,
-  "cash": 50000.0,
-  "positions": {},
+  "cash": 40152.0,
+  "positions": {
+    "510050": {
+      "shares": 3400,
+      "cost_price": 2.895,
+      "open_date": "2026-11-13",
+      "name": "上证50ETF华夏"
+    }
+  },
   "pending_orders": [
     {
       "code": "562500",
       "side": "BUY",
       "signal_date": "2026-11-10",
       "reason": "金叉+MACD>0"
-    },
+    }
+  ],
+  "trades": [
     {
       "code": "510050",
+      "name": "上证50ETF华夏",
       "side": "BUY",
-      "signal_date": "2026-11-12",
+      "signal_date": "",
+      "open_date": "2026-11-13",
+      "shares": 3400,
+      "open_price": 2.895,
+      "amount": 9843.0,
+      "fee": 5.0,
       "reason": "金叉+MACD>0"
     }
   ],
-  "trades": [],
   "nav_daily": [
     {
       "date": "2026-10-25",
@@ -41,6 +55,12 @@
       "cash": 50000.0,
       "mv": 0.0,
       "equity": 50000.0
+    },
+    {
+      "date": "2026-11-13",
+      "cash": 40152.0,
+      "mv": 9822.6,
+      "equity": 49974.6
     }
   ],
   "protections": {}
