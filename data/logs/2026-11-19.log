@@ -1,0 +1,36 @@
+2026-11-19 16:05:19 [INFO] etf_quant: ============================================================
+2026-11-19 16:05:19 [INFO] etf_quant: ETF 量化自动化系统启动（2026-11-19 16:05:19）
+2026-11-19 16:05:19 [INFO] etf_quant: 运行时间配置 15:05 / 时区 Asia/Shanghai
+2026-11-19 16:05:20 [INFO] etf_quant: 已缓存 510500 净值 3339 条（最新 2026-11-18）
+2026-11-19 16:05:21 [INFO] etf_quant: 已缓存 159915 净值 3660 条（最新 2026-11-18）
+2026-11-19 16:05:22 [INFO] etf_quant: 已缓存 510050 净值 5316 条（最新 2026-11-18）
+2026-11-19 16:05:23 [INFO] etf_quant: 已缓存 513100 净值 3256 条（最新 2026-11-17）
+2026-11-19 16:05:24 [INFO] etf_quant: 已缓存 513500 净值 3052 条（最新 2026-11-17）
+2026-11-19 16:05:25 [INFO] etf_quant: 已缓存 510880 净值 4856 条（最新 2026-11-18）
+2026-11-19 16:05:26 [INFO] etf_quant: 已缓存 512480 净值 1818 条（最新 2026-11-18）
+2026-11-19 16:05:27 [INFO] etf_quant: 已缓存 588000 净值 1470 条（最新 2026-11-18）
+2026-11-19 16:05:28 [INFO] etf_quant: 已缓存 159516 净值 809 条（最新 2026-11-18）
+2026-11-19 16:05:29 [INFO] etf_quant: 已缓存 510300 净值 3535 条（最新 2026-11-18）
+2026-11-19 16:05:30 [INFO] etf_quant: 已缓存 512000 净值 2484 条（最新 2026-11-18）
+2026-11-19 16:05:31 [INFO] etf_quant: 已缓存 562500 净值 1191 条（最新 2026-11-18）
+2026-11-19 16:05:32 [INFO] etf_quant: 已缓存 510500 kline 3322 条（最新 2026-11-19，中证500ETF南方）
+2026-11-19 16:05:34 [INFO] etf_quant: 已缓存 159915 kline 3627 条（最新 2026-11-19，创业板ETF易方达）
+2026-11-19 16:05:35 [INFO] etf_quant: 已缓存 510050 kline 5284 条（最新 2026-11-19，上证50ETF华夏）
+2026-11-19 16:05:36 [INFO] etf_quant: 已缓存 513100 kline 3285 条（最新 2026-11-19，纳指ETF国泰）
+2026-11-19 16:05:45 [INFO] etf_quant: 已缓存 513500 kline 3121 条（最新 2026-11-19，标普500ETF博时）
+2026-11-19 16:05:53 [ERROR] etf_quant: 获取 510880 kline 失败，跳过：Remote end closed connection without response
+2026-11-19 16:06:00 [ERROR] etf_quant: 获取 512480 kline 失败，跳过：Remote end closed connection without response
+2026-11-19 16:06:08 [ERROR] etf_quant: 获取 588000 kline 失败，跳过：Remote end closed connection without response
+2026-11-19 16:06:16 [ERROR] etf_quant: 获取 159516 kline 失败，跳过：Remote end closed connection without response
+2026-11-19 16:06:24 [ERROR] etf_quant: 获取 510300 kline 失败，跳过：Remote end closed connection without response
+2026-11-19 16:06:32 [ERROR] etf_quant: 获取 512000 kline 失败，跳过：Remote end closed connection without response
+2026-11-19 16:06:41 [ERROR] etf_quant: 获取 562500 kline 失败，跳过：Remote end closed connection without response
+2026-11-19 16:06:41 [INFO] etf_quant: 模拟盘完成：2026-11-19 持仓 2 只 / 净值 49949.20 / 挂单 0
+2026-11-19 16:06:42 [INFO] etf_quant: 信息面完成：快讯 0 条，命中 0 条 → /home/runner/work/etf-quant-auto/etf-quant-auto/data/news/2026-11-19.json
+2026-11-19 16:06:42 [INFO] etf_quant: 报告已保存：/home/runner/work/etf-quant-auto/etf-quant-auto/data/signals/report_latest.md
+2026-11-19 16:06:42 [INFO] etf_quant: ============================================================
+2026-11-19 16:06:42 [INFO] etf_quant: 本次运行结束
+2026-11-19 16:06:44 [INFO] etf_quant: 已缓存 024418 净值 288 条（最新 2026-11-18）
+2026-11-19 16:06:44 [INFO] etf_quant: 已缓存 017997 净值 896 条（最新 2026-11-18）
+2026-11-19 16:06:45 [INFO] etf_quant: 已缓存 007531 净值 1809 条（最新 2026-11-18）
+2026-11-19 16:06:46 [INFO] etf_quant: 已缓存 020640 净值 657 条（最新 2026-11-18）
